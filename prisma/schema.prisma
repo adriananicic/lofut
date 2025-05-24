@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -9,11 +8,12 @@ datasource db {
 }
 
 model Match {
-  id         String       @id @default(cuid())
-  name       String
-  date       DateTime
-  isFinished Boolean      @default(false)
-  events     MatchEvent[]
+  id       String       @id @default(cuid())
+  teamA    String
+  teamB    String
+  date     DateTime
+  location String
+  events   MatchEvent[]
 }
 
 model MatchEvent {
@@ -26,15 +26,15 @@ model MatchEvent {
   eventType MatchEventType
 }
 
+model Player {
+  id     String       @id @default(cuid())
+  name   String
+  events MatchEvent[]
+}
+
 enum MatchEventType {
   GOAL
   ASSIST
   YELLOW_CARD
   RED_CARD
-}
-
-model Player {
-  id     String       @id @default(cuid())
-  name   String
-  events MatchEvent[]
 }
