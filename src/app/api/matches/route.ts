@@ -1,10 +1,17 @@
-import { NextRequest } from "next/server";
-import * as MatchController from "@/server/controllers/MatchController";
+import { NextRequest, NextResponse } from "next/server";
+import * as MatchService from "@/server/services/MatchServices";
 
 export async function GET() {
-  return MatchController.getAll();
+  const matches = await MatchService.getAll();
+  return NextResponse.json(matches);
 }
 
 export async function POST(req: NextRequest) {
-  return MatchController.create(req);
+  try {
+    const body = await req.json();
+    const match = await MatchService.create(body);
+    return NextResponse.json(match, { status: 201 });
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 400 });
+  }
 }

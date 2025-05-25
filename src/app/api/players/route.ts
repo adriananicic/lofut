@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import * as PlayerController from "@/server/controllers/PlayerController";
+import * as PlayerService from "@/server/services/PlayerServices";
 
 export async function GET(req: NextRequest) {
-  return PlayerController.getAll(req);
+  const search = req.nextUrl.searchParams.get("search") || "";
+  const players = await PlayerService.getAll(search);
+  return NextResponse.json(players);
 }
 
 export async function POST(req: NextRequest) {
-  return PlayerController.create(req);
+  try {
+    const body = await req.json();
+    const player = await PlayerService.create(body);
+    return NextResponse.json(player, { status: 201 });
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 400 });
+  }
 }
