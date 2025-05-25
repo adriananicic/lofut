@@ -22,7 +22,7 @@ export async function create(req: NextRequest) {
       { status: 400 }
     );
   }
-  const player = await PlayerRepo.create(name);
+  const player = await PlayerRepo.create({ name: name, number: number });
   return NextResponse.json(player, { status: 201 });
 }
 

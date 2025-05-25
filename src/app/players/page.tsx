@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { usePlayers } from "@/client/hooks/usePlayers";
 import { useRouter } from "next/navigation";
 

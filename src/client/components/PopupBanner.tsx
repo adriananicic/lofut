@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { usePopupBanner } from "../context/PopupBannerContext";
 
 export default function PopupBanner() {
