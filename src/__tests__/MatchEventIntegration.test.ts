@@ -9,7 +9,7 @@ describe("MatchEventRepo (integration)", () => {
   beforeAll(async () => {
     const player = await prisma.player.create({
       data: {
-        name: "TEST_Player",
+        name: "T igrac",
         number: 99,
       },
     });
