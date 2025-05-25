@@ -21,7 +21,7 @@ model MatchEvent {
   matchId   String
   match     Match          @relation(fields: [matchId], references: [id])
   playerId  String
-  player    Player         @relation(fields: [playerId], references: [id])
+  player    Player         @relation(fields: [playerId], references: [id], onDelete: Cascade)
   minute    Int
   eventType MatchEventType
 }
@@ -29,6 +29,7 @@ model MatchEvent {
 model Player {
   id     String       @id @default(cuid())
   name   String
+  number Int
   events MatchEvent[]
 }
 

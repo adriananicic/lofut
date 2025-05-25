@@ -16,3 +16,11 @@ export async function PUT(
   const { id } = await params;
   return MatchController.update(req, id);
 }
+
+export async function DELETE(
+  _req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
+  return MatchController.remove(id);
+}

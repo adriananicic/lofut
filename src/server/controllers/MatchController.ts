@@ -70,3 +70,15 @@ export async function update(req: NextRequest, id: string) {
   const updated = await MatchRepo.update(id, body);
   return NextResponse.json(updated);
 }
+
+export async function remove(id: string) {
+  try {
+    await MatchRepo.deleteById(id);
+    return NextResponse.json({ message: "Utakmica obrisana" });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Greška prilikom brisanja utakmice" },
+      { status: 500 }
+    );
+  }
+}

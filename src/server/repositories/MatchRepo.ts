@@ -38,3 +38,9 @@ export function update(id: string, data: any) {
     },
   });
 }
+
+export const deleteById = async (id: string) => {
+  return prisma.match.delete({
+    where: { id },
+  });
+};

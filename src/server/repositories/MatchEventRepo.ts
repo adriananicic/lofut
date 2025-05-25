@@ -20,3 +20,25 @@ export function create(matchId: string, data: any) {
     },
   });
 }
+
+export async function getMaxMinute(matchId: string): Promise<number> {
+  const result = await prisma.matchEvent.aggregate({
+    where: { matchId },
+    _max: { minute: true },
+  });
+
+  return result._max.minute ?? 0;
+}
+
+export function update(eventId: string, data: any) {
+  return prisma.matchEvent.update({
+    where: { id: eventId },
+    data,
+  });
+}
+
+export function remove(eventId: string) {
+  return prisma.matchEvent.delete({
+    where: { id: eventId },
+  });
+}
